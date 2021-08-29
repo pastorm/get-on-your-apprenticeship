@@ -1,6 +1,7 @@
 import random
+from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from fastapi.responses import PlainTextResponse, JSONResponse
 
 import requests
@@ -35,8 +36,13 @@ async def get_student():
 
 
 @router.get("/students")
-async def list():
-    return JSONResponse(get_student())
+async def students_list(house: Optional[str] = Query(None, enum=settings["STUDENT_HOUSE_CHOICES"])):
+    students = await get_students()
+
+    if house:
+        students = list(filter(lambda student: student['house'] == house, students))
+
+    return JSONResponse(students)
 
 
 @router.get("/random_student")
