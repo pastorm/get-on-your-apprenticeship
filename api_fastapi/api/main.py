@@ -45,6 +45,7 @@ app.include_router(real_router)
 # Index
 #
 
+
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     return templates.TemplateResponse(
