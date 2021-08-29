@@ -7,16 +7,16 @@ class App extends Component {
     super(props);
     this.state = { apiResponse: "" };
   }
+  
+  componentDidMount() {
+    this.getStudents();
+  }
 
-  callAPI() {
-    fetch("http://localhost:3000/dummy/student")
+  getStudents() {
+    fetch("http://localhost:3000/real/students")
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res }))
       .catch(err => err);
-  }
-
-  componentWillMount() {
-    this.callAPI();
   }
 
   render() {

@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import PlainTextResponse, JSONResponse
 
+
 router = APIRouter(prefix="/dummy", tags=["dummy"])
 
 
@@ -10,12 +11,12 @@ async def dummy():
 
 
 @router.get("/student")
-async def root():
+async def get_student():
     return PlainTextResponse("Harry Potter !")
 
 
 @router.get("/students")
-async def root():
+async def list():
     return JSONResponse(
         [
             {"name": "Harry Potter", "house": "Gryffindor"},
