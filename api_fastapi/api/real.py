@@ -30,12 +30,12 @@ async def real():
     return PlainTextResponse("This is a dummy route")
 
 
-@router.get("/student")
+@router.get("/student/")
 async def get_student():
     return PlainTextResponse("Harry Potter !")
 
 
-@router.get("/students")
+@router.get("/students/")
 async def students_list(house: Optional[str] = Query(None, enum=settings["STUDENT_HOUSE_CHOICES"])):
     students = await get_students()
 
@@ -45,7 +45,7 @@ async def students_list(house: Optional[str] = Query(None, enum=settings["STUDEN
     return JSONResponse(students)
 
 
-@router.get("/random_student")
+@router.get("/random_student/")
 async def random_student():
     students: list = await get_students()
     choosen_one = random.choice(students)

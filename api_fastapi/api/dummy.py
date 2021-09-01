@@ -10,12 +10,12 @@ async def dummy():
     return PlainTextResponse("This is a dummy route")
 
 
-@router.get("/student")
+@router.get("/student/")
 async def get_student():
     return PlainTextResponse("Harry Potter !")
 
 
-@router.get("/students")
+@router.get("/students/")
 async def list():
     return JSONResponse(
         [

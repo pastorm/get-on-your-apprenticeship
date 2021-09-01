@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  front:
+    build: 
+      context: ./front
+    image: get-on-your-apprenticeship_front
+    environment:
+      - BACK_URL="http://back:80/"
+    ports:
+      - 9090:80
+    depends_on: 
+      - back
+
+  back:
+    build:
+      context: ./api_fastapi
+      args: 
+        - INSTALL_DEV=False
+    image: get-on-your-apprenticeship_back
+    ports:
+      - 8080:80

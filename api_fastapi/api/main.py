@@ -16,14 +16,15 @@ from settings import settings
 #
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="api/static"), name="static")
-templates = Jinja2Templates(directory="api/templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 #
 # CORS
 #
 origins = [
-    "http://localhost:8080",
+    "*",
+    "http://localhost:9090",
 ]
 
 app.add_middleware(

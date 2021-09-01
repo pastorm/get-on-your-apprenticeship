@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './hogwarts.png';
 import './App.css';
 
+// ENV settings
+var dotenv = require('dotenv')
+var dotenvExpand = require('dotenv-expand')
+
+var env = dotenv.config()
+dotenvExpand(env)
+// ------------------
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +22,8 @@ class App extends Component {
   }
 
   getStudents() {
-    fetch("http://localhost:3000/real/students")
+    // fetch(process.env.URL_GET_STUDENTS)
+    fetch("http://localhost:8080/real/students/")
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res }))
       .catch(err => err);
