@@ -1,1 +1,7 @@
 site_name: Get on you apprenticeship
+theme:
+  name: material
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
