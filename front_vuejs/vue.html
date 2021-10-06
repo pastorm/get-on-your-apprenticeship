@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mon interface</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="app">
+            <div class="container">
+                <div class="row">
+                    <p class="jumbotron">Login : <input type="text" v-model="user"/> | Vous êtes connecté en tant que {{ user }}</p>
+                </div>
+                
+                <h1 v-bind:class="display">Produits disponibles</h1>
+                <div class="row">
+                    <product v-for="product in products" v-bind:name="product" role="commande" v-on:ordering="ordering(product)"></product>
+                </div>
+                
+                <h1 v-bind:class="display" v-if="order.length > 0">Produits commandés</h1>
+                <div class="row">
+                    <product v-for="item in order" v-bind:name="item" role="recap"></product>
+                </div>                
+            </div>
+        </div>
+        <script>
+            Vue.component(
+                'product',
+                {
+                    template: `
+                        <div class="col-3">
+                            <p class="jumbotron">{{ name }}
+                                </br>
+                                <button v-on:click="do_order(name)" v-if="role == 'commande'">Commander</button>
+                            </p>
+                        </div>
+                    `,
+                    props: ['name', 'role'],
+                    methods: {
+                        do_order: function(produit){
+                            this.$emit('ordering', produit)
+                        }
+                    }
+                }
+            )
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    user: "mpastor",
+                    products: ["Pizza", "Hamburger", "Big-Mac", "Tacos"],
+                    order: [],
+                    display: "display-4"
+                },
+                methods:{
+                    ordering: function(produit){
+                        console.log(produit)
+                        this.order.push(produit)
+                    },
+                }
+            })
+        </script>
+    </body>
+</html>
